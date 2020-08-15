@@ -13,3 +13,7 @@ c) O(n)
 This recursive function is called as many times as there are bunnies input, no more, no less. It would be much simpler and less resource intensive to just multiply the input bunnies * 2.
 
 ## Exercise II
+
+I think a strategy of dropping 1 egg off the midpoint floor, halfway between 0:n, then repeating at the mid-point of the bottom half of floors if the egg breaks, or repeating at the mid-point of the top half of floors if it doesn't, would be the most effective & efficient way to accomplish this. Basically a binary search which works since the floor numbers 0:n are basically sorted.
+
+Complexity would be O(log n).
