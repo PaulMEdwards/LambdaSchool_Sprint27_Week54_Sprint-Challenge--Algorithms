@@ -1,3 +1,5 @@
+debug = False
+
 class SortingRobot:
     def __init__(self, l):
         """
@@ -96,8 +98,77 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # robot light must be used as a boolean variable since no new variables can be created/assigned.
+        # Bubble Sort seems to be the best approach since it only deals with 2 values at a time.
+
+        if debug: print(f"beg:\t{self._list}\tlight ON: {self.light_is_on()}")
+        # ensure light is off
+        self.set_light_off()
+        # move through data rightward swapping larger values
+        while self.can_move_right():
+            # grab item in front, advance, compare
+            self.swap_item()
+            self.move_right()
+            # if item in front is larger
+            if self.compare_item() == 1:
+                # swap held with item in front, put it in the position to the left, then return here
+                self.swap_item()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                # indicate item swapped
+                self.set_light_on()
+            # if item in front is smaller
+            # elif self.compare_item() == -1:
+            else:
+                # back up, put held back, advance
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            # # if item in front is same
+            # elif self.compare_item() == 0:
+            #     self.move_right()
+            #     # indicate equal
+            #     self.set_light_on()
+
+        if debug: print(f"mid:\t{self._list}\tlight ON: {self.light_is_on()}")
+        if self.light_is_on():
+            self.set_light_off()
+        else:
+            return
+
+        self.move_left()
+        # move back through data leftward swapping smaller values
+        while self.can_move_left():
+            # self.move_left()
+            self.swap_item()
+            self.move_left()
+            # if item in front is smaller
+            if self.compare_item() == -1:
+                # swap held with item in front, put it in the position to the left, then return here
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+                # indicate item swapped
+                self.set_light_on()
+            # if item in front is larger
+            # elif self.compare_item() == 1:
+            else:
+                # back up, put held back, advance
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+            # # if item in front is same
+            # elif self.compare_item() == 0:
+            #     self.move_left()
+            #     # indicate equal
+            #     self.set_light_on()
+
+        if debug: print(f"end:\t{self._list}\tlight ON: {self.light_is_on()}")
+        if self.light_is_on():
+            # repeat process
+            self.sort()
 
 
 if __name__ == "__main__":
